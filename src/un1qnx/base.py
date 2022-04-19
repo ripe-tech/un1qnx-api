@@ -44,11 +44,11 @@ class API(
         kwargs = None
     ):
         auth = kwargs.pop("auth", True)
-        if auth:
-            if not self.token: self.token = self.get_token()
-            headers["Authorization"] = "Bearer %s" % self.token
+        if auth: headers["Authorization"] = self.auth_header()
 
     def get_token(self):
+        if self.token: return self.token
+
         url = self.auth_url + "connect/token"
         params = dict(
             client_id = self.client_id,
@@ -56,4 +56,13 @@ class API(
             grant_type = self.grant_type
         )
         contents = self.post(url, params = params)
-        return contents.get("access_token", None)
+
+        self.token = contents.get("access_token", None)
+        return self.token
+
+    def auth_callback(self, params, headers):
+        self.token = None
+        headers["Authorization"] = self.auth_header()
+
+    def auth_header(self):
+        return "Bearer %s" % self.get_token()
