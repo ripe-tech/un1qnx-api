@@ -4,10 +4,10 @@ Simple Python API client for [un1qnx](https://un1qnx.com/).
 
 ## Configuration
 
-| Name                | Type  | Description                                                                               |
-| ------------------- | ----- | ----------------------------------------------------------------------------------------- |
-| **UN1QNX_BASE_URL**   | `str` | The base URL to be used in the remote API calls (defaults to `http://localhost/api/`).    |
-| **UN1QNX_AUTH_URL**   | `str` | The username to be used in the authenticated remote calls (defaults to `None`).           |
+| Name                | Type  | Description                                                       |
+| ------------------- | ----- | ----------------------------------------------------------------- |
+| **UN1QNX_BASE_URL** | `str` | The base URL to be used in the remote API calls.                  |
+| **UN1QNX_AUTH_URL** | `str` | The authentication URL to be used in the authentication API call. |
 
 ## License
 
