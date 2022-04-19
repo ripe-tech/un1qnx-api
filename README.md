@@ -1,2 +1,3 @@
-# un1qnx-api
-Simple Python API client for un1qnx
+# un1qnx API
+
+Simple Python API client for [un1qnx](https://un1qnx.com/).
