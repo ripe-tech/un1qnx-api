@@ -27,3 +27,34 @@ class API(
 
         self.base_url = kwargs.get("base_url", self.base_url)
         self.auth_url = kwargs.get("auth_url", self.auth_url)
+        self.token = kwargs.get("token", None)
+        self.client_id = kwargs.get("client_id", None)
+        self.client_secret = kwargs.get("client_secret", None)
+        self.grant_type = kwargs.get("grant_type", "client_credentials")
+
+    def build(
+        self,
+        method,
+        url,
+        data = None,
+        data_j = None,
+        data_m = None,
+        headers = None,
+        params = None,
+        mime = None,
+        kwargs = None
+    ):
+        auth = kwargs.pop("auth", True)
+        if auth:
+            if not self.token: self.token = self.get_token()
+            headers["Authorization"] = "Bearer %s" % self.token
+
+    def get_token(self):
+        url = self.auth_url + "connect/token"
+        params = dict(
+            client_id = self.client_id,
+            client_secret = self.client_secret,
+            grant_type = self.grant_type
+        )
+        contents = self.post(url, params = params)
+        return contents.get("access_token", None)
