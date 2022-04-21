@@ -29,7 +29,7 @@ class API(
         self.token = kwargs.get("token", None)
         self.client_id = kwargs.get("client_id", None)
         self.client_secret = kwargs.get("client_secret", None)
-        self.grant_type = kwargs.get("grant_type", "client_credentials")
+        self.grant_type = kwargs.get("grant_type", None) or "client_credentials"
 
     def build(
         self,
@@ -50,14 +50,19 @@ class API(
         if self.token: return self.token
 
         url = self.auth_url + "connect/token"
+        print(url)
         params = dict(
             client_id = self.client_id,
             client_secret = self.client_secret,
             grant_type = self.grant_type
         )
+        print(params)
         contents = self.post(url, params = params)
+        print(contents)
 
         self.token = contents.get("access_token", None)
+
+        raise Exception("TODO")
         return self.token
 
     def auth_callback(self, params, headers):
