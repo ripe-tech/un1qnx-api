@@ -6,11 +6,11 @@ import appier
 from . import tag
 from . import product
 
-UN1QNX_BASE_URL = "http://un1qone-backend-test.azurewebsites.net/api/v2/"
+UN1QNX_BASE_URL = "https://un1qone-backend-test.azurewebsites.net/api/v2/"
 """ The default base URL to be used when no other
 base URL value is provided to the constructor """
 
-UN1QNX_AUTH_URL = "http://un1qone-identity-server-test.azurewebsites.net/"
+UN1QNX_AUTH_URL = "https://un1qone-identity-server-test.azurewebsites.net/"
 """ The default auth URL to be used when no other
 auth URL value is provided to the constructor """
 
