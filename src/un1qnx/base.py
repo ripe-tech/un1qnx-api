@@ -24,8 +24,8 @@ class API(
         appier.API.__init__(self, *args, **kwargs)
         self.base_url = appier.conf("UN1QNX_BASE_URL", UN1QNX_BASE_URL)
         self.auth_url = appier.conf("UN1QNX_AUTH_URL", UN1QNX_AUTH_URL)
-        self.base_url = kwargs.get("base_url", self.base_url)
-        self.auth_url = kwargs.get("auth_url", self.auth_url)
+        self.base_url = kwargs.get("base_url", None) or self.base_url
+        self.auth_url = kwargs.get("auth_url", None) or self.auth_url
         self.token = kwargs.get("token", None)
         self.client_id = kwargs.get("client_id", None)
         self.client_secret = kwargs.get("client_secret", None)
