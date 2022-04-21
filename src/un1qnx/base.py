@@ -50,19 +50,14 @@ class API(
         if self.token: return self.token
 
         url = self.auth_url + "connect/token"
-        print(url)
         params = dict(
             client_id = self.client_id,
             client_secret = self.client_secret,
             grant_type = self.grant_type
         )
-        print(params)
-        contents = self.post(url, params = params)
-        print(contents)
+        contents = self.post(url, params = params, auth = False)
 
         self.token = contents.get("access_token", None)
-
-        raise Exception("TODO")
         return self.token
 
     def auth_callback(self, params, headers):
