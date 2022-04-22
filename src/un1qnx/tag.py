@@ -9,7 +9,7 @@ class TagAPI(object):
         return contents
 
     def get_tag(self, id):
-        url = self.base_url + "tags/%d" % id
+        url = self.base_url + "tags/%s" % id
         contents = self.get(url)
         return contents
 
@@ -29,7 +29,7 @@ class TagAPI(object):
         return self.update_tag_state(id, "expired")
 
     def update_tag_state(self, id, state):
-        url = self.base_url + "tags/%d/partial" % id
+        url = self.base_url + "tags/%s/partial" % id
         data_j = dict(
             state = state
         )

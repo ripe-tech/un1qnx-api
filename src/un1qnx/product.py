@@ -9,6 +9,6 @@ class ProductAPI(object):
         return contents
 
     def get_product(self, id):
-        url = self.base_url + "products/%d" % id
+        url = self.base_url + "products/%s" % id
         contents = self.get(url)
         return contents
