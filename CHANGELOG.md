@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Basic `ProductAPI` and `TagAPI` with `BaseAPI` authentication
 * Tag state updates (activation, expiration, ...)
+* Tag state updates by barcode (serial number)
 
 ### Changed
 
