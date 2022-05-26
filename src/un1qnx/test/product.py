@@ -40,3 +40,82 @@ class ProductAPITest(unittest.TestCase):
         self.assertEqual("link" in products, True)
         self.assertEqual("total" in products, True)
         self.assertEqual("items" in products, True)
+
+    def test_create_product(self):
+        try:
+            product = self.api.create_product(dict(
+                tenantId = 3,
+                brand = "dummy",
+                name = "product",
+                description = "a test product"
+            ))
+            self.assertEqual(product["tenantId"], 3)
+            self.assertEqual(product["brand"], "dummy")
+            self.assertEqual(product["name"], "product")
+            self.assertEqual(product["description"], "a test product")
+        finally:
+            self.api.delete_product(product["id"])
+
+    def test_get_product(self):
+        try:
+            first_product = self.api.create_product(dict(
+                tenantId = 3,
+                brand = "dummy",
+                name = "product",
+                description = "a test product"
+            ))
+            second_product = self.api.get_product(first_product["id"])
+            self.assertEqual(first_product["id"], second_product["id"])
+            self.assertEqual(first_product["tenantId"], 3)
+            self.assertEqual(first_product["brand"], "dummy")
+            self.assertEqual(first_product["name"], "product")
+            self.assertEqual(first_product["description"], "a test product")
+            self.assertEqual(second_product["tenantId"], 3)
+            self.assertEqual(second_product["brand"], "dummy")
+            self.assertEqual(second_product["name"], "product")
+            self.assertEqual(second_product["description"], "a test product")
+        finally:
+            self.api.delete_product(first_product["id"])
+
+    def test_update_product(self):
+        try:
+            first_product = self.api.create_product(dict(
+                tenantId = 3,
+                brand = "dummy",
+                name = "product",
+                description = "a test product"
+            ))
+            self.api.update_product(
+                first_product["id"],
+                dict(
+                    name = "updated product",
+                    description = "an updated product"
+                )    
+            )
+            second_product = self.api.get_product(first_product["id"])
+            self.assertEqual(first_product["id"], second_product["id"])
+            self.assertEqual(first_product["tenantId"], 3)
+            self.assertEqual(first_product["brand"], "dummy")
+            self.assertEqual(first_product["name"], "product")
+            self.assertEqual(first_product["description"], "a test product")
+            self.assertEqual(second_product["tenantId"], 3)
+            self.assertEqual(second_product["brand"], "dummy")
+            self.assertEqual(second_product["name"], "updated product")
+            self.assertEqual(second_product["description"], "an updated product")
+        finally:
+            self.api.delete_product(first_product["id"])
+
+    def test_get_product(self):
+        try:
+            product = self.api.create_product(dict(
+                tenantId = 3,
+                brand = "dummy",
+                name = "product",
+                description = "a test product"
+            ))
+            product = self.api.get_product(product["id"])
+            
+            self.api.delete_product(product["id"])
+            self.assertRaises(appier.HTTPError, lambda: self.api.get_product(product["id"]))
+        except:
+            self.api.delete_product(product["id"])
