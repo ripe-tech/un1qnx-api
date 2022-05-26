@@ -76,7 +76,7 @@ class TagAPITest(unittest.TestCase):
         tag = self.api.get_tag(tag["id"])
         self.assertEqual(tag["state"], "Expired")
 
-    def create_tag_by_code(self):
+    def test_create_tag_by_code(self):
         tag = self._get_test_tag()
         self.api.create_tag_by_code(tag["barcode"])
         tag = self.api.get_tag(tag["id"])
