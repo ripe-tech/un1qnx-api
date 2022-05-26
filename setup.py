@@ -17,6 +17,7 @@ setuptools.setup(
     packages = [
         "un1qnx"
     ],
+    test_suite = "un1qnx.test",
     package_dir = {
         "" : os.path.normpath("src")
     },
