@@ -19,7 +19,7 @@ jobs:
           TEST_CLIENT_SECRET : ${{ secrets.TEST_CLIENT_SECRET }}
       - run: |
           pip install coveralls
-          coverage run --source=un1qnx setup.py test
+          coverage run --source=un1qnx --omit="*/test*" setup.py test
           coveralls
         env:
           TEST_CLIENT_ID : ${{ secrets.TEST_CLIENT_ID }}
