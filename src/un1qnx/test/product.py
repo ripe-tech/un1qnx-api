@@ -90,7 +90,7 @@ class ProductAPITest(unittest.TestCase):
                 dict(
                     name = "updated product",
                     description = "an updated product"
-                )    
+                )
             )
             second_product = self.api.get_product(first_product["id"])
             self.assertEqual(first_product["id"], second_product["id"])
@@ -114,7 +114,7 @@ class ProductAPITest(unittest.TestCase):
                 description = "a test product"
             ))
             product = self.api.get_product(product["id"])
-            
+
             self.api.delete_product(product["id"])
             self.assertRaises(appier.HTTPError, lambda: self.api.get_product(product["id"]))
         except:

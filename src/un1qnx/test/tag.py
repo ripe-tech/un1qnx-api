@@ -44,7 +44,8 @@ class TagAPITest(unittest.TestCase):
     def test_get_tag(self):
         first_tag = self._get_test_tag()
         second_tag = self.api.get_tag(first_tag["id"])
-        self.assertEqual(first_tag, second_tag)
+        self.assertEqual(first_tag["id"], second_tag["id"])
+        self.assertEqual(first_tag["barcode"], second_tag["barcode"])
 
     def test_create_tag(self):
         tag = self._get_test_tag()
