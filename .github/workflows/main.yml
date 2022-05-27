@@ -14,10 +14,15 @@ jobs:
       - run: pip install -r requirements.txt
         if: matrix.python-version != '2.7'
       - run: python setup.py test
+        env:
+          TEST_CLIENT_ID : ${{ secrets.TEST_CLIENT_ID }}
+          TEST_CLIENT_SECRET : ${{ secrets.TEST_CLIENT_SECRET }}
       - run: |
           pip install coveralls
           coverage run --source=un1qnx setup.py test
           coveralls
         env:
+          TEST_CLIENT_ID : ${{ secrets.TEST_CLIENT_ID }}
+          TEST_CLIENT_SECRET : ${{ secrets.TEST_CLIENT_SECRET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
