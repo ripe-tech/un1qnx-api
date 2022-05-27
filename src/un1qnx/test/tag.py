@@ -48,74 +48,62 @@ class TagAPITest(unittest.TestCase):
 
     def test_create_tag(self):
         tag = self._get_test_tag()
-        self.api.create_tag(tag["id"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.create_tag(tag["id"])
         self.assertEqual(tag["state"], "Created")
 
     def test_activate_tag(self):
         tag = self._get_test_tag()
-        self.api.activate_tag(tag["id"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.activate_tag(tag["id"])
         self.assertEqual(tag["state"], "Active")
 
     def test_inactivate_tag(self):
         tag = self._get_test_tag()
-        self.api.inactivate_tag(tag["id"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.inactivate_tag(tag["id"])
         self.assertEqual(tag["state"], "Inactive")
 
     def test_disable_tag(self):
         tag = self._get_test_tag()
-        self.api.disable_tag(tag["id"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.disable_tag(tag["id"])
         self.assertEqual(tag["state"], "Disabled")
 
     def test_expire_tag(self):
         tag = self._get_test_tag()
-        self.api.expire_tag(tag["id"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.expire_tag(tag["id"])
         self.assertEqual(tag["state"], "Expired")
 
     def test_create_tag_by_code(self):
         tag = self._get_test_tag()
-        self.api.create_tag_by_code(tag["barcode"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.create_tag_by_code(tag["barcode"])
         self.assertEqual(tag["state"], "Created")
 
     def test_activate_tag_by_code(self):
         tag = self._get_test_tag()
-        self.api.activate_tag_by_code(tag["barcode"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.activate_tag_by_code(tag["barcode"])
         self.assertEqual(tag["state"], "Active")
 
     def test_inactivate_tag_by_code(self):
         tag = self._get_test_tag()
-        self.api.inactivate_tag_by_code(tag["barcode"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.inactivate_tag_by_code(tag["barcode"])
         self.assertEqual(tag["state"], "Inactive")
 
     def test_disable_tag_by_code(self):
         tag = self._get_test_tag()
-        self.api.disable_tag_by_code(tag["barcode"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.disable_tag_by_code(tag["barcode"])
         self.assertEqual(tag["state"], "Disabled")
 
     def test_expire_tag_by_code(self):
         tag = self._get_test_tag()
-        self.api.expire_tag_by_code(tag["barcode"])
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.expire_tag_by_code(tag["barcode"])
         self.assertEqual(tag["state"], "Expired")
 
     def test_update_tag_state(self):
         tag = self._get_test_tag()
-        self.api.update_tag_state(tag["id"], "Expired")
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.update_tag_state(tag["id"], "Expired")
         self.assertEqual(tag["state"], "Expired")
 
     def test_update_tag_state_by_code(self):
         tag = self._get_test_tag()
-        self.api.update_tag_state_by_code(tag["barcode"], "Expired")
-        tag = self.api.get_tag(tag["id"])
+        tag = self.api.update_tag_state_by_code(tag["barcode"], "Expired")
         self.assertEqual(tag["state"], "Expired")
 
     def _get_test_tag(self):
