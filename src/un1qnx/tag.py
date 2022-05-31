@@ -8,9 +8,9 @@ class TagAPI(object):
         contents = self.get(url, **kwargs)
         return contents
 
-    def get_tag(self, id):
+    def get_tag(self, id, **kwargs):
         url = self.base_url + "tags/%s" % id
-        contents = self.get(url)
+        contents = self.get(url, **kwargs)
         return contents
 
     def create_tag(self, id):
