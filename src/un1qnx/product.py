@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-class ProductAPI(object):
 
+class ProductAPI(object):
     def list_products(self, *args, **kwargs):
         url = self.base_url + "products"
         contents = self.get(url, **kwargs)

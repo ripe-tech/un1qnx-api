@@ -7,29 +7,35 @@ import appier
 
 import un1qnx
 
-class ProductAPITest(unittest.TestCase):
 
+class ProductAPITest(unittest.TestCase):
     def setUp(self):
-        self.base_url = appier.conf("TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v2/")
-        self.auth_url = appier.conf("TEST_AUTH_URL", "https://un1qone-identity-server-test.azurewebsites.net/")
+        self.base_url = appier.conf(
+            "TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v2/"
+        )
+        self.auth_url = appier.conf(
+            "TEST_AUTH_URL", "https://un1qone-identity-server-test.azurewebsites.net/"
+        )
         self.client_id = appier.conf("TEST_CLIENT_ID", None)
         self.client_secret = appier.conf("TEST_CLIENT_SECRET", None)
         self.grant_type = appier.conf("TEST_GRANT_TYPE", "client_credentials")
 
         if not self.client_id:
-            if not hasattr(self, "skipTest"): return
+            if not hasattr(self, "skipTest"):
+                return
             self.skipTest("TEST_CLIENT_ID not defined")
 
         if not self.client_secret:
-            if not hasattr(self, "skipTest"): return
+            if not hasattr(self, "skipTest"):
+                return
             self.skipTest("TEST_CLIENT_SECRET not defined")
 
         self.api = un1qnx.API(
-            base_url = self.base_url,
-            auth_url = self.auth_url,
-            client_id = self.client_id,
-            client_secret = self.client_secret,
-            grant_type = self.grant_type
+            base_url=self.base_url,
+            auth_url=self.auth_url,
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            grant_type=self.grant_type,
         )
 
     def tearDown(self):
@@ -43,12 +49,14 @@ class ProductAPITest(unittest.TestCase):
 
     def test_create_product(self):
         try:
-            product = self.api.create_product(dict(
-                tenantId = 3,
-                brand = "dummy",
-                name = "product",
-                description = "a test product"
-            ))
+            product = self.api.create_product(
+                dict(
+                    tenantId=3,
+                    brand="dummy",
+                    name="product",
+                    description="a test product",
+                )
+            )
             self.assertEqual(product["tenantId"], 3)
             self.assertEqual(product["brand"], "dummy")
             self.assertEqual(product["name"], "product")
@@ -58,12 +66,14 @@ class ProductAPITest(unittest.TestCase):
 
     def test_get_product(self):
         try:
-            first_product = self.api.create_product(dict(
-                tenantId = 3,
-                brand = "dummy",
-                name = "product",
-                description = "a test product"
-            ))
+            first_product = self.api.create_product(
+                dict(
+                    tenantId=3,
+                    brand="dummy",
+                    name="product",
+                    description="a test product",
+                )
+            )
             second_product = self.api.get_product(first_product["id"])
             self.assertEqual(first_product["id"], second_product["id"])
             self.assertEqual(first_product["tenantId"], 3)
@@ -79,18 +89,17 @@ class ProductAPITest(unittest.TestCase):
 
     def test_update_product(self):
         try:
-            first_product = self.api.create_product(dict(
-                tenantId = 3,
-                brand = "dummy",
-                name = "product",
-                description = "a test product"
-            ))
+            first_product = self.api.create_product(
+                dict(
+                    tenantId=3,
+                    brand="dummy",
+                    name="product",
+                    description="a test product",
+                )
+            )
             self.api.update_product(
                 first_product["id"],
-                dict(
-                    name = "updated product",
-                    description = "an updated product"
-                )
+                dict(name="updated product", description="an updated product"),
             )
             second_product = self.api.get_product(first_product["id"])
             self.assertEqual(first_product["id"], second_product["id"])
@@ -105,17 +114,21 @@ class ProductAPITest(unittest.TestCase):
         finally:
             self.api.delete_product(first_product["id"])
 
-    def test_get_product(self):
+    def test_delete_product(self):
         try:
-            product = self.api.create_product(dict(
-                tenantId = 3,
-                brand = "dummy",
-                name = "product",
-                description = "a test product"
-            ))
+            product = self.api.create_product(
+                dict(
+                    tenantId=3,
+                    brand="dummy",
+                    name="product",
+                    description="a test product",
+                )
+            )
             product = self.api.get_product(product["id"])
 
             self.api.delete_product(product["id"])
-            self.assertRaises(appier.HTTPError, lambda: self.api.get_product(product["id"]))
+            self.assertRaises(
+                appier.HTTPError, lambda: self.api.get_product(product["id"])
+            )
         except:
             self.api.delete_product(product["id"])
