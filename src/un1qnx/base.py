@@ -14,12 +14,8 @@ UN1QNX_AUTH_URL = "https://un1qone-identity-server-test.azurewebsites.net/"
 """ The default auth URL to be used when no other
 auth URL value is provided to the constructor """
 
-class API(
-    appier.API,
-    tag.TagAPI,
-    product.ProductAPI
-):
 
+class API(appier.API, tag.TagAPI, product.ProductAPI):
     def __init__(self, *args, **kwargs):
         appier.API.__init__(self, *args, **kwargs)
         self.base_url = appier.conf("UN1QNX_BASE_URL", UN1QNX_BASE_URL)
@@ -35,31 +31,34 @@ class API(
         self,
         method,
         url,
-        data = None,
-        data_j = None,
-        data_m = None,
-        headers = None,
-        params = None,
-        mime = None,
-        kwargs = None
+        data=None,
+        data_j=None,
+        data_m=None,
+        headers=None,
+        params=None,
+        mime=None,
+        kwargs=None,
     ):
         auth = kwargs.pop("auth", True)
-        if auth: headers["Authorization"] = self.auth_header()
+        if auth:
+            headers["Authorization"] = self.auth_header()
 
     def get_token(self):
-        if self.token: return self.token
+        if self.token:
+            return self.token
 
         url = self.auth_url + "connect/token"
         params = dict(
-            client_id = self.client_id,
-            client_secret = self.client_secret,
-            grant_type = self.grant_type
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            grant_type=self.grant_type,
         )
-        contents = self.post(url, params = params, auth = False)
+        contents = self.post(url, params=params, auth=False)
 
         self.token = contents.get("access_token", None)
         return self.token
 
+    # pylint: disable-next=method-hidden
     def auth_callback(self, params, headers):
         self.token = None
         headers["Authorization"] = self.auth_header()

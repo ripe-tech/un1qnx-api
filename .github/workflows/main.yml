@@ -13,6 +13,15 @@ jobs:
       - run: python --version
       - run: pip install -r requirements.txt
         if: matrix.python-version != '2.7'
+      - run: |
+          pip install pylint
+          curl https://raw.githubusercontent.com/ripe-tech/pylint-config/master/pylintrc --output pylintrc
+          PYTHONPATH=src pylint src/un1qnx
+        if: matrix.python-version != '2.7' && matrix.python-version != '3.5'
+      - run: |
+          pip install black
+          black . --check --config ./pyproject.toml
+        if: matrix.python-version != '2.7' && matrix.python-version != '3.5'
       - run: python setup.py test
         env:
           TEST_CLIENT_ID : ${{ secrets.TEST_CLIENT_ID }}

@@ -1,16 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-class TagAPI(object):
 
+class TagAPI(object):
     def list_tags(self, *args, **kwargs):
         url = self.base_url + "tags"
         contents = self.get(url, **kwargs)
         return contents
 
-    def get_tag(self, id):
+    def get_tag(self, id, **kwargs):
         url = self.base_url + "tags/%s" % id
-        contents = self.get(url)
+        contents = self.get(url, **kwargs)
         return contents
 
     def create_tag(self, id):
@@ -45,16 +45,12 @@ class TagAPI(object):
 
     def update_tag_state(self, id, state):
         url = self.base_url + "tags/%s/partial" % id
-        data_j = dict(
-            state = state
-        )
-        contents = self.patch(url, data_j = data_j)
+        data_j = dict(state=state)
+        contents = self.patch(url, data_j=data_j)
         return contents
 
     def update_tag_state_by_code(self, code, state):
         url = self.base_url + "tags/byCode/%s/partial" % code
-        data_j = dict(
-            state = state
-        )
-        contents = self.patch(url, data_j = data_j)
+        data_j = dict(state=state)
+        contents = self.patch(url, data_j=data_j)
         return contents
