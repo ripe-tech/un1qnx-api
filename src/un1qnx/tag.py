@@ -14,43 +14,41 @@ class TagAPI(object):
         return contents
 
     def create_tag(self, id):
-        return self.update_tag_state(id, "created")
+        return self.update_tag(id, dict(state="created"))
 
     def activate_tag(self, id):
-        return self.update_tag_state(id, "active")
+        return self.update_tag(id, dict(state="active"))
 
     def inactivate_tag(self, id):
-        return self.update_tag_state(id, "inactive")
+        return self.update_tag(id, dict(state="inactive"))
 
     def disable_tag(self, id):
-        return self.update_tag_state(id, "disabled")
+        return self.update_tag(id, dict(state="disabled"))
 
     def expire_tag(self, id):
-        return self.update_tag_state(id, "expired")
+        return self.update_tag(id, dict(state="expired"))
 
     def create_tag_by_code(self, code):
-        return self.update_tag_state_by_code(code, "created")
+        return self.update_tag_by_code(code, dict(state="created"))
 
     def activate_tag_by_code(self, code):
-        return self.update_tag_state_by_code(code, "active")
+        return self.update_tag_by_code(code, dict(state="active"))
 
     def inactivate_tag_by_code(self, code):
-        return self.update_tag_state_by_code(code, "inactive")
+        return self.update_tag_by_code(code, dict(state="inactive"))
 
     def disable_tag_by_code(self, code):
-        return self.update_tag_state_by_code(code, "disabled")
+        return self.update_tag_by_code(code, dict(state="disabled"))
 
     def expire_tag_by_code(self, code):
-        return self.update_tag_state_by_code(code, "expired")
+        return self.update_tag_by_code(code, dict(state="expired"))
 
-    def update_tag_state(self, id, state):
+    def update_tag(self, id, tag):
         url = self.base_url + "tags/%s/partial" % id
-        data_j = dict(state=state)
-        contents = self.patch(url, data_j=data_j)
+        contents = self.patch(url, data_j=tag)
         return contents
 
-    def update_tag_state_by_code(self, code, state):
+    def update_tag_by_code(self, code, tag):
         url = self.base_url + "tags/byCode/%s/partial" % code
-        data_j = dict(state=state)
-        contents = self.patch(url, data_j=data_j)
+        contents = self.patch(url, data_j=tag)
         return contents
