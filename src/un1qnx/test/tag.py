@@ -103,14 +103,14 @@ class TagAPITest(unittest.TestCase):
         tag = self.api.expire_tag_by_code(tag["barcode"])
         self.assertNotEqual(tag, None)
 
-    def test_update_tag_state(self):
+    def test_update_tag(self):
         tag = self._get_test_tag()
-        tag = self.api.update_tag_state(tag["id"], "Expired")
+        tag = self.api.update_tag(tag["id"], dict(state="Expired"))
         self.assertNotEqual(tag, None)
 
-    def test_update_tag_state_by_code(self):
+    def test_update_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.update_tag_state_by_code(tag["barcode"], "Expired")
+        tag = self.api.update_tag_by_code(tag["barcode"], dict(state="Expired"))
         self.assertNotEqual(tag, None)
 
     def _get_test_tag(self):
