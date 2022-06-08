@@ -6,7 +6,7 @@ import setuptools
 
 setuptools.setup(
     name="un1qnx-api",
-    version="0.1.0",
+    version="0.2.0",
     author="Platforme International",
     author_email="development@platforme.com",
     description="un1qnx API",

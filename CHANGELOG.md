@@ -9,15 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+*
+
+### Changed
+
+*
+
+### Fixed
+
+*
+
+## [0.2.0] - 2020-06-08
+
+### Added
+
 * Create, update and delete methods for product API - [ripe-robin-revamp/#363](https://github.com/ripe-tech/ripe-robin-revamp/issues/363)
 
 ### Changed
 
 * Patch tag method receives updated tag body instead of just state - [ripe-robin-revamp/#363](https://github.com/ripe-tech/ripe-robin-revamp/issues/363)
-
-### Fixed
-
-*
+* Bump Un1qnx API version to v3 - [ripe-robin-revamp/#363](https://github.com/ripe-tech/ripe-robin-revamp/issues/363)
 
 ## [0.1.0] - 2020-04-22
 
