@@ -11,7 +11,7 @@ import un1qnx
 class ProductAPITest(unittest.TestCase):
     def setUp(self):
         self.base_url = appier.conf(
-            "TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v2/"
+            "TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v3/"
         )
         self.auth_url = appier.conf(
             "TEST_AUTH_URL", "https://un1qone-identity-server-test.azurewebsites.net/"

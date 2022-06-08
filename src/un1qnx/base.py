@@ -6,7 +6,7 @@ import appier
 from . import tag
 from . import product
 
-UN1QNX_BASE_URL = "https://un1qone-backend-test.azurewebsites.net/api/v2/"
+UN1QNX_BASE_URL = "https://un1qone-backend-test.azurewebsites.net/api/v3/"
 """ The default base URL to be used when no other
 base URL value is provided to the constructor """
 

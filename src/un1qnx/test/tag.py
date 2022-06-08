@@ -11,7 +11,7 @@ import un1qnx
 class TagAPITest(unittest.TestCase):
     def setUp(self):
         self.base_url = appier.conf(
-            "TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v2/"
+            "TEST_BASE_URL", "https://un1qone-backend-test.azurewebsites.net/api/v3/"
         )
         self.auth_url = appier.conf(
             "TEST_AUTH_URL", "https://un1qone-identity-server-test.azurewebsites.net/"
@@ -51,7 +51,7 @@ class TagAPITest(unittest.TestCase):
         first_tag = self._get_test_tag()
         second_tag = self.api.get_tag(first_tag["id"])
         self.assertEqual(first_tag["id"], second_tag["id"])
-        self.assertEqual(first_tag["barcode"], second_tag["barcode"])
+        self.assertEqual(first_tag["tagCode"], second_tag["tagCode"])
 
     def test_create_tag(self):
         tag = self._get_test_tag()
@@ -80,27 +80,27 @@ class TagAPITest(unittest.TestCase):
 
     def test_create_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.create_tag_by_code(tag["barcode"])
+        tag = self.api.create_tag_by_code(tag["tagCode"])
         self.assertNotEqual(tag, None)
 
     def test_activate_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.activate_tag_by_code(tag["barcode"])
+        tag = self.api.activate_tag_by_code(tag["tagCode"])
         self.assertNotEqual(tag, None)
 
     def test_inactivate_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.inactivate_tag_by_code(tag["barcode"])
+        tag = self.api.inactivate_tag_by_code(tag["tagCode"])
         self.assertNotEqual(tag, None)
 
     def test_disable_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.disable_tag_by_code(tag["barcode"])
+        tag = self.api.disable_tag_by_code(tag["tagCode"])
         self.assertNotEqual(tag, None)
 
     def test_expire_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.expire_tag_by_code(tag["barcode"])
+        tag = self.api.expire_tag_by_code(tag["tagCode"])
         self.assertNotEqual(tag, None)
 
     def test_update_tag(self):
@@ -110,7 +110,7 @@ class TagAPITest(unittest.TestCase):
 
     def test_update_tag_by_code(self):
         tag = self._get_test_tag()
-        tag = self.api.update_tag_by_code(tag["barcode"], dict(state="Expired"))
+        tag = self.api.update_tag_by_code(tag["tagCode"], dict(state="Expired"))
         self.assertNotEqual(tag, None)
 
     def _get_test_tag(self):
