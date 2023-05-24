@@ -5,23 +5,22 @@ jobs:
     name: Build
     strategy:
       matrix:
-        python-version: ["2.7", "3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "rc"]
+        python-version: ["3.5", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "rc"]
     runs-on: ubuntu-latest
     container: python:${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v1
       - run: python --version
       - run: pip install -r requirements.txt
-        if: matrix.python-version != '2.7'
       - run: |
           pip install pylint
           curl https://raw.githubusercontent.com/ripe-tech/pylint-config/master/pylintrc --output pylintrc
           PYTHONPATH=src pylint src/un1qnx
-        if: matrix.python-version != '2.7' && matrix.python-version != '3.5'
+        if: matrix.python-version != '3.5'
       - run: |
           pip install black
           black . --check --config ./pyproject.toml
-        if: matrix.python-version != '2.7' && matrix.python-version != '3.5'
+        if: matrix.python-version != '3.5'
       - run: python setup.py test
         env:
           TEST_CLIENT_ID : ${{ secrets.TEST_CLIENT_ID }}
